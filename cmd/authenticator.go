@@ -9,7 +9,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/portainer/authenticator/internal/cli"
+	"github.com/portainer/authenticator/internal/config"
 )
 
 type authenticationRequestPayload struct {
@@ -18,7 +18,7 @@ type authenticationRequestPayload struct {
 }
 
 func main() {
-	options := cli.ParseOptions()
+	options := config.ParseOptions()
 
 	apiURL, err := url.Parse(*options.PortainerAPI)
 	if err != nil {
