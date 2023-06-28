@@ -1,15 +1,15 @@
-package main // import "github.com/portainer/authenticator"
+package main
 
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"path"
 
-	"github.com/portainer/authenticator/cli"
+	"github.com/portainer/authenticator/internal/cli"
 )
 
 type authenticationRequestPayload struct {
@@ -18,7 +18,6 @@ type authenticationRequestPayload struct {
 }
 
 func main() {
-
 	options := cli.ParseOptions()
 
 	apiURL, err := url.Parse(*options.PortainerAPI)
@@ -59,7 +58,7 @@ func main() {
 
 	token := data["jwt"]
 
-	raw, err := ioutil.ReadFile(*options.ConfigFilePath)
+	raw, err := os.ReadFile(*options.ConfigFilePath)
 	if err != nil {
 		log.Fatalf("Unable to read configuration file: %s", err.Error())
 	}
@@ -83,7 +82,7 @@ func main() {
 		log.Fatalf("Unable to encode configuration file content: %s", err.Error())
 	}
 
-	err = ioutil.WriteFile(*options.ConfigFilePath, buf, 0644)
+	err = os.WriteFile(*options.ConfigFilePath, buf, 0644)
 	if err != nil {
 		log.Fatalf("Unable to write to configuration file: %s", err.Error())
 	}

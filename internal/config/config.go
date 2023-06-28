@@ -1,4 +1,4 @@
-package authenticator
+package config
 
 type (
 	// Options represent the CLI options (flags and arguments) passed to the binary.
