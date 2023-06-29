@@ -21,6 +21,11 @@ type PortainerApiClientModel struct {
 }
 
 func NewPortainerApiClientModel(options *types.Options) (*PortainerApiClientModel, error) {
+	// if portainer url contains https://, remove it
+	if options.PortainerURL != nil && len(*options.PortainerURL) > 8 && (*options.PortainerURL)[0:8] == "https://" {
+		*options.PortainerURL = (*options.PortainerURL)[8:]
+	}
+
 	httpTransport := httptransport.NewWithClient(*options.PortainerURL, "/api", []string{"https"}, &http.Client{Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: *options.InsecureTls}}})
 	c := portainerclient.New(httpTransport, strfmt.Default)
 

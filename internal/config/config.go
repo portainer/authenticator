@@ -6,7 +6,9 @@ import (
 )
 
 // ConfigFilePath represent the path to the config.json file that will be updated.
-const DefaultConfigFilePath = "/config.json"
+const (
+	DefaultConfigFilePath = "/config.json"
+)
 
 // ParseOptions parses the arguments/flags passed to the binary.
 func ParseOptions() *types.Options {
