@@ -14,7 +14,7 @@ func main() {
 	options := config.ParseOptions()
 
 	// initialise a HTTP client to communicate with the Portainer API
-	client, err := api.NewPortainerApiClientModel(*options.PortainerURL, *options.Username, *options.Password, *options.InsecureTls)
+	client, err := api.NewPortainerApiClientModel(options)
 	if err != nil {
 		log.Fatalf("unable to create portainer client: %s...", err.Error())
 	}

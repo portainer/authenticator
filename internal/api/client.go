@@ -6,6 +6,7 @@ import (
 
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/portainer/authenticator/internal/types"
 	portainerclient "github.com/portainer/client-api-go/v2/client"
 )
 
@@ -19,14 +20,14 @@ type PortainerApiClientModel struct {
 	HttpTransport *httptransport.Runtime
 }
 
-func NewPortainerApiClientModel(hostname string, username string, password string, insecureTls bool) (*PortainerApiClientModel, error) {
-	httpTransport := httptransport.NewWithClient(hostname, "/api", []string{"https"}, &http.Client{Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: insecureTls}}})
+func NewPortainerApiClientModel(options *types.Options) (*PortainerApiClientModel, error) {
+	httpTransport := httptransport.NewWithClient(*options.PortainerURL, "/api", []string{"https"}, &http.Client{Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: *options.InsecureTls}}})
 	c := portainerclient.New(httpTransport, strfmt.Default)
 
 	return &PortainerApiClientModel{
-		Hostname:      hostname,
-		Username:      username,
-		Password:      password,
+		Hostname:      *options.PortainerURL,
+		Username:      *options.Username,
+		Password:      *options.Password,
 		Client:        c,
 		HttpTransport: httpTransport,
 	}, nil
