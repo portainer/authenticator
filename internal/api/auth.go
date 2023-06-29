@@ -26,14 +26,3 @@ func GetAuthJwt(r *PortainerApiClientModel, options *types.Options) (string, err
 
 	return response.Payload.Jwt, err
 }
-
-// func GetAuthType(portainerHostname string, portainerUsername string, portainerPassword string, portainerApiKey string, insecureTls bool) (runtime.ClientAuthInfoWriter, error) {
-// 	if (portainerApiKey != "") || (portainerUsername != "" && portainerPassword != "" && portainerApiKey != "") {
-// 		return httptransport.APIKeyAuth("X-API-KEY", "header", portainerApiKey), nil
-// 	} else if portainerUsername != "" && portainerPassword != "" && portainerApiKey == "" {
-// 		var token, err = GetAuthJwt(portainerHostname, portainerUsername, portainerPassword, insecureTls)
-// 		return httptransport.BearerToken(token), err
-// 	} else {
-// 		return nil, errors.New("no authentication type was found. Ensure it is either basic using username and password, or API Key based")
-// 	}
-// }
