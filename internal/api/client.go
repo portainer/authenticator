@@ -26,8 +26,8 @@ func NewPortainerApiClientModel(options *types.Options) (*PortainerApiClientMode
 
 	return &PortainerApiClientModel{
 		Hostname:      *options.PortainerURL,
-		Username:      *options.Username,
-		Password:      *options.Password,
+		Username:      "",
+		Password:      "",
 		Client:        c,
 		HttpTransport: httpTransport,
 	}, nil
